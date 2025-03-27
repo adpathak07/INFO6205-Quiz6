@@ -21,12 +21,29 @@ public class QuickSort {
     private static void sort(Comparable[] a, int lo, int hi) {
         if (hi <= lo) return;
        //Student TODO
+       int j = partition(a, lo, hi);
+       sort(a, lo, j - 1);  // for left part
+       sort(a, j + 1, hi);  // for right part
     }
 
     // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
     // and return the index j.
     private static int partition(Comparable[] a, int lo, int hi) {
         //Student TODO
+        Comparable pivot = a[lo]; 
+        int i = lo;
+        int j = hi + 1;
+        
+        while (true) {
+            while (less(a[++i], pivot)) if (i == hi) break; 
+            while (less(pivot, a[--j])) if (j == lo) break; 
+            
+            if (i >= j) break; 
+            exch(a, i, j);
+        }
+        
+        exch(a, lo, j); 
+        return j; 
     }
 
     
